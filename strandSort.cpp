@@ -21,34 +21,6 @@
 #include <vector>
 #include "someFunctions.cpp"
 
-std::vector<int> mergeVectors(std::vector<int> a, std::vector<int> b){
-    std::vector<int> c;
-    int ac = 0, am = a.size(), bc = 0, bm = b.size();
-    // If both arrays aren't empty, take the smallest value;
-    while(ac != am || bc != bm){
-        if(ac != am && bc != bm){
-            if(a[ac] > b[bc]){
-                c.push_back(b[bc]);
-                bc++;
-            }
-            else{
-                c.push_back(a[ac]);
-                ac++;
-            }
-        }
-        // If either are empty, only take from the non-empty value
-        else if(ac != am){
-            c.push_back(a[ac]);
-            ac++;
-        }
-        else{
-            c.push_back(b[bc]);
-            bc++;
-        }
-    }
-    return c;
-}
-
 // Recursive call
 std::vector<int> strandCall(std::vector<int> inputVector){
     if(inputVector.size() == 1)
