@@ -24,6 +24,7 @@
 std::vector<int> mergeVectors(std::vector<int> a, std::vector<int> b){
     std::vector<int> c;
     int ac = 0, am = a.size(), bc = 0, bm = b.size();
+    // If both arrays aren't empty, take the smallest value;
     while(ac != am || bc != bm){
         if(ac != am && bc != bm){
             if(a[ac] > b[bc]){
@@ -35,6 +36,7 @@ std::vector<int> mergeVectors(std::vector<int> a, std::vector<int> b){
                 ac++;
             }
         }
+        // If either are empty, only take from the non-empty value
         else if(ac != am){
             c.push_back(a[ac]);
             ac++;
@@ -47,12 +49,15 @@ std::vector<int> mergeVectors(std::vector<int> a, std::vector<int> b){
     return c;
 }
 
+// Recursive call
 std::vector<int> strandCall(std::vector<int> inputVector){
     if(inputVector.size() == 1)
         return inputVector;
     std::vector<int> subStrand;
+    // Move the first value
     subStrand.push_back(inputVector[0]);
     inputVector.erase(inputVector.begin());
+    // If there are more values, successively add greater values
     if(inputVector.size()){
         for(int i = 0; i < inputVector.size(); i++){
             if(inputVector[i] > subStrand[subStrand.size() - 1]){
@@ -62,8 +67,11 @@ std::vector<int> strandCall(std::vector<int> inputVector){
             }
         }
     }
+    // If the initial vector still retains values, recursive call
+    // merge than return
     if(inputVector.size())
         return mergeVectors(subStrand, strandCall(inputVector));
+    // If initial vector is empty return ordered vector
     return subStrand;
 }
 
